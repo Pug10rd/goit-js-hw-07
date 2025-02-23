@@ -13,11 +13,14 @@ const images = [
   },
 ];
 
-const gallery = document.querySelector(".gallery");
-const markup = images
-  .map(
-    (item) =>
-      `<li class="list-item new"><img src=${item.url} alt="${item.alt}" style="width: 50vw"/></li>`
-  )
-  .join("");
-gallery.innerHTML += markup;
+document
+  .querySelector(".gallery")
+  .insertAdjacentHTML(
+    "beforeend",
+    images
+      .map(
+        ({ url, alt }) =>
+          `<li><img src="${url}" alt="${alt}" width="300" height="200"></li>`
+      )
+      .join("")
+  );

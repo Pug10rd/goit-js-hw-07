@@ -9,48 +9,42 @@ const create = document.querySelector("button[data-create]");
 const destroy = document.querySelector("button[data-destroy]");
 const input = document.querySelector("input");
 
-let lastValue = null; // Змінна для збереження останнього введеного значення
-
 function createBoxes(amount) {
-  if (amount >= 1 && amount <= 100) {
-    let colorama = [];
-
-    for (let i = 0; i < amount; i++) {
-      colorama.push(getRandomHexColor());
-    }
-
-    const markup = colorama
-      .map(
-        (color, index) =>
-          `<div style="background-color: ${color}; height: ${
-            30 + index * 10 + "px"
-          }; width: ${30 + index * 10 + "px"}" class="list-item"></div>`
-      )
-      .join("");
-
-    boxes.innerHTML = markup;
-  }
-}
-
-function destroyBoxes() {
   boxes.innerHTML = "";
+  let size = 30;
+  const fragment = document.createDocumentFragment();
+
+  for (let i = 0; i < amount; i++) {
+    const box = document.createElement("div");
+    box.style.width = `${size}px`;
+    box.style.height = `${size}px`;
+    box.style.backgroundColor = getRandomHexColor();
+    box.style.margin = "5px";
+    fragment.appendChild(box);
+    size += 10;
+  }
+
+  boxes.appendChild(fragment);
 }
 
 create.addEventListener("click", () => {
-  let amount = Number(input.value.trim());
-
-  if (!isNaN(amount) && amount >= 1 && amount <= 100) {
-    lastValue = amount;
-    destroyBoxes();
-    createBoxes(amount);
-  } else if (lastValue !== null) {
-    destroyBoxes();
-    createBoxes(lastValue);
+  if (input.value >= 1 && input.value <= 100) {
+    createBoxes(input.value);
   }
-
   input.value = "";
 });
 
 destroy.addEventListener("click", () => {
-  destroyBoxes();
+  boxes.innerHTML = "";
 });
+
+// createButton.addEventListener("click", () => {
+//   if (numberInput.value >= 1 && numberInput.value <= 100) {
+//     createBoxes(numberInput.value);
+//   }
+//   numberInput.value = "";
+// });
+
+// deleteButton.addEventListener("click", () => {
+//   boxesContainer.innerHTML = "";
+// });
