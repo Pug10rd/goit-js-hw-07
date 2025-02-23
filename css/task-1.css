@@ -1,0 +1,20 @@
+.item {
+    background-color: #F6F6FE;
+    margin-bottom: 24px;
+    padding: 16px;
+    max-width: 392px;
+}
+
+.item li {
+    max-width: 360px;
+    border: 1px solid #808080;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    padding: 8px 16px;
+    background-color: #F6F6FE;
+    color: #2E2F42;
+}
+
+h2 {
+    margin-bottom: 16px;
+}
